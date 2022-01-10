@@ -1,0 +1,36 @@
+<%- include('../partials/header'); -%>
+
+<div class="container">
+	<header class="h-100 p-5 bg-light border rounded-3 mb-4">
+		<div class="container">
+			<h1><i class="fas fa-graduation-cap"></i> Welcome to HireHub!!</h1>
+			<p class="lead">The ultimate solution to all your placement problems</p>
+			<p>View the job listings from all over the world</p>
+			<% if(currentUser && currentUser.admin){ %>
+				<p><a class="btn btn-primary btn-large" href="/jobs/new">Add new job</a>	</p>
+			<% } %>
+		</div>
+	</header>
+  
+	<div class="row text-center" style="display:flex; flex-wrap:wrap;">
+		<% for ( var i=0; i<jobs.length; i++){ %>
+			<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+				<div class="card text-dark bg-light" >
+					<div class="card-body">
+						<!-- <img src="image/job.png" alt="job logo" class="card-img-top" style="width: 50%; height: auto;"> -->
+						<img src=<%=jobs[i].logo%> alt="job logo" class="card-img-top" style="width: 150px; height: 150px;">
+						<h5 class="card-title mt-2"><%=jobs[i].name%></h5>
+						<h6 class="card-subtitle mb-2 text-muted">CGPA Eligibility: <%=jobs[i].eligibility%></h6>
+						<p class="card-text"><%=jobs[i].description%></p>
+						<a href="/jobs/<%= jobs[i]._id%>" class="btn btn-primary">More Info</a>
+					</div>
+				</div>
+			</div>
+			<br>
+		<% } %>
+	</div>  
+</div>
+
+<%- include('../partials/footer'); -%>
+
+

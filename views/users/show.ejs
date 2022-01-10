@@ -1,0 +1,151 @@
+<%- include('../partials/header'); -%>
+
+<div class="container">
+  <% if(error && error.length > 0){ %>
+  <div class="alert alert-danger" role="alert"><%= error %></div>
+  <% } %> <% if(success && success.length > 0){ %>
+  <div class="alert alert-success" role="alert"><%= success %></div>
+  <% } %>
+</div>
+
+<div class="container emp-profile">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img
+            src="https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=20&m=1223671392&s=612x612&w=0&h=lGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0="
+            alt="profile"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5><%=user.name%></h5>
+          <h6>Student</h6>
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                id="home"
+                data-toggle="tab"
+                href="#home"
+                role="tab"
+                aria-controls="home-tab"
+                aria-selected="true"
+                >About</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <% if(currentUser && user._id.equals(currentUser._id) || currentUser &&
+        currentUser.admin){ %>
+        <a href="/users/<%=user._id%>/edit" class="btn btn-warning">edit</a>
+        <% } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-work">
+          <p>WORK LINK</p>
+          <a href="<%=user.resume_link%>">Resume link</a>
+          <a href="<%=user.documents_link%>">Documents link</a>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            tabindex="0"
+            id="home-tab"
+            role="tabpanel"
+            aria-labelledby="home"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <label>User Id</label>
+              </div>
+              <div class="col-md-6">
+                <p><%=user.username%></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Name</label>
+              </div>
+              <div class="col-md-6">
+                <p><%=user.name%></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Email</label>
+              </div>
+              <div class="col-md-6">
+                <p><%=user.personal_email%></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Mobile Number</label>
+              </div>
+              <div class="col-md-6">
+                <p><%=user.mobile_number%></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Branch</label>
+              </div>
+              <div class="col-md-6">
+                <p><%=user.branch%></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>CGPA</label>
+              </div>
+              <div class="col-md-6">
+                <p><%=user.cgpa%></p>
+              </div>
+            </div>
+          </div>
+          <div class="profile-head">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="home"
+                  data-toggle="tab"
+                  href="#home"
+                  role="tab"
+                  aria-controls="home-tab"
+                  aria-selected="true"
+                  >Applied Jobs</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <% user.appliedJobs.forEach(function(job){ %>
+            <div class="card mx-2 my-4">
+              <a
+                class="card-header text-decoration-none"
+                href="/jobs/<%=job._id%>"
+                ><%=job.name%></a
+              >
+              <p class="card-body"><%=job.description%></p>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/footer'); -%>

@@ -1,0 +1,13 @@
+.left-align{
+    font-weight: bold;
+text-align: left;
+float: left;
+}
+.register-container{
+    margin-top: 100px;
+}
+.register-img{
+    height: 100%;
+    width: 50%;
+    text-align: center;
+}

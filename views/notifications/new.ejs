@@ -1,0 +1,31 @@
+<%- include('../partials/header'); -%>
+<div class = "container">
+	<div class="row justify-content-center">
+		<!-- JUMBOTRON -->
+		<header class="h-100 p-5 bg-light border rounded-3">
+		<h1 style="text-align: center;">Create a new Notification</h1>
+		</header>
+		
+		<!-- FORM -->
+		<div style="width: 30%; margin: 25px auto;">
+			<form action="/notifications" method="POST">
+				
+				<div class="input-group mb-3">
+					<input class="form-control" type="text" name="description" placeholder="description">
+				</div>
+				<div class="input-group mb-3">
+					<input class="form-control" type="text" name="author" placeholder="author">
+				</div>
+				<div class="form-group">
+					<div class="d-grid gap-2">
+					  <button class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+			<a href ="/notifications">Go back</a>
+		</div>
+	</div>
+</div>
+<%- include('../partials/footer'); -%>
+
+

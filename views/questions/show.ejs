@@ -1,0 +1,41 @@
+<%- include('../partials/header'); -%>
+
+<h1>
+	HIRE HUB TEST SHOW PAGE FOR JOB 
+	<%=job.name%>
+</h1>
+
+<a href="/jobs">go back</a>
+
+
+
+	<h1>
+		list of questions
+	</h1>
+	<% job.questions.forEach(function(question){ %>
+	<div>
+		<h4>
+			<%=question.description%>
+		</h4>
+		<ul>
+			<li>option 1: <%=question.option1%></li>
+			<li>option 2: <%=question.option2%></li>
+			<li>option 3: <%=question.option3%></li>
+			<li>option 4: <%=question.option4%></li>
+			<li>correct option: <%=question.correctAns%></li>
+			<li><a href="/job/<%=job._id%>/questions/<%=question._id%>/edit" class="btn btn-primary">edit</a></li>
+			<li>
+				<form action="/job/<%=job._id%>/questions/<%=question._id%>?_method=DELETE" method="POST">
+					<button class="btn btn-primary">delete</button>
+				</form>
+			</li>
+		</ul>
+	</div>
+	<% }) %>
+<a class="btn btn-primary" href="/job/<%=job._id%>/questions/new">add a new question</a>
+
+<% if(currentUser && currentUser.admin){ %>
+	
+	
+<% } %>
+<%- include('../partials/footer'); -%>

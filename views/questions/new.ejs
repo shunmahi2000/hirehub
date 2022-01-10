@@ -1,0 +1,40 @@
+<%- include('../partials/header'); -%>
+<div class = "container">
+	<div class="row justify-content-center">
+		<!-- JUMBOTRON -->
+		<header class="h-100 p-5 bg-light border rounded-3">
+		<h1 style="text-align: center;">Create a new question for job <%=job.name%></h1>
+		</header>
+		
+		<!-- FORM -->
+		<div style="width: 30%; margin: 25px auto;">
+			<form action="/job/<%=job._id%>/questions" method="POST">
+				<div class="input-group mb-3">
+					<input class="form-control" type="text" name="question[description]" placeholder="description">
+				</div>
+				<div class="input-group mb-3">
+					<input class="form-control" type="text" name="question[option1]" placeholder="option 1">
+				</div>
+				<div class="input-group mb-3">
+					<input class="form-control" type="text" name="question[option2]" placeholder="option 2">
+				</div>
+				<div class="input-group mb-3">
+					<input class="form-control" type="text" name="question[option3]" placeholder="option 3">
+				</div>
+				<div class="input-group mb-3">
+					<input class="form-control" type="text" name="question[option4]" placeholder="option 4">
+				</div>
+				<div class="input-group mb-3">
+					<input class="form-control" type="text" name="question[correctAns]" placeholder="correct answer">
+				</div>
+				<div class="form-group">
+					<div class="d-grid gap-2">
+					  <button class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+			<a href ="/jobs">Go back</a>
+		</div>
+	</div>
+</div>
+<%- include('../partials/footer'); -%>

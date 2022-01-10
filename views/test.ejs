@@ -1,0 +1,44 @@
+<%- include('./partials/header'); -%>
+
+<div style="width: 70%; margin: 25px auto;">
+	<h1>
+	welcome to the test page for : <%=job.name%>
+	</h1>
+	<h4>
+		your profile informations are : 
+	</h4>
+	<p>
+		<strong>name: </strong><%=user.name%>
+	</p>
+	<p>
+		<strong>branch: </strong><%=user.branch%>
+	</p>
+	<p>
+		<strong>cgpa: </strong><%=user.cgpa%>
+	</p>
+	<p>
+		<strong>personal email: </strong><%=user.personal_email%>
+	</p>
+	<br>
+	<p>
+		you have x amount of time to submit the test, the questions will all be mcqs
+	</p>
+	<form action="/job/<%=job._id%>/test/<%=user._id%>" method="POST">
+		<% for(let i=0;i<job.questions.length;i++){ %>
+			<h1>question number: <%=i+1%></h1>
+			<p>
+				<%=job.questions[i].description%>
+			</p>
+			<input type="radio" id="option1" name="option[<%=i%>]" value="option1" required>
+			<label for="option1"><%=job.questions[i].option1%></label><br>
+			<input type="radio" id="option2" name="option[<%=i%>]" value="option2">
+			<label for="option2"><%=job.questions[i].option2%></label><br>
+			<input type="radio" id="option3" name="option[<%=i%>]" value="option3">
+			<label for="option3"><%=job.questions[i].option3%></label><br>
+			<input type="radio" id="option4" name="option[<%=i%>]" value="option4">
+			<label for="option4"><%=job.questions[i].option4%></label><br>
+		<% } %>
+			  <button class="btn btn-primary" type="submit">Submit</button>
+	</form>
+</div>
+<%- include('./partials/footer'); -%>

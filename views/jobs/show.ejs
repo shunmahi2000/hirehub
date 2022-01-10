@@ -1,0 +1,81 @@
+<%- include('../partials/header'); -%>
+<div class="container card emp-profile">
+  <div class="card-header d-flex justify-content-center align-items-center">
+    <img
+      src="<%= job.logo%>"
+      alt="job logo"
+      class="card-img-top mx-3"
+      style="width: 20%; height: auto"
+    />
+    <h1 class="card-title"><%=job.name%></h1>
+  </div>
+
+  <div class="card-body">
+    <h4 class="card p-2 bg-warning text-dark">
+      Must be atleast cgpa: <%=job.eligibility%>
+    </h4>
+    <p class="card-body"><%=job.description%></p>
+  </div>
+
+  <div class="btn-group p-3 col-sm-4">
+    <% if(currentUser && currentUser.admin){ %>
+    <a href="/jobs/<%=job._id%>/edit" class="btn btn-primary mx-2">edit</a>
+    <form action="/jobs/<%=job._id%>?_method=DELETE" method="POST">
+      <button class="btn btn-danger mx-2">delete</button>
+    </form>
+    <% } %>
+    <a
+      href="/jobs/<%=job._id%>/apply/<%=currentUser._id%>"
+      class="btn btn-primary mx-2"
+      >Apply</a
+    >
+  </div>
+
+  <% if(currentUser && !currentUser.selected){ %> <%
+  job.students.forEach(function(student){ %> <% if((student.name ==
+  currentUser.name) || (currentUser && currentUser.admin)){ %>
+  <a href="/job/<%=job._id%>/test/<%=currentUser._id%>" class="btn btn-primary"
+    >go to test page</a
+  >
+  <% } %> <% }) %> <% } %> <% if(currentUser && !currentUser.selected){ %> <%
+  job.students.forEach(function(student){ %> <% if(student.name ==
+  currentUser.name){ %> <% if(student.shortlisted){ %>
+  <h1 class="card p-2 bg-info text-dark">
+    Congratulations, you have been shortlisted for this job, please wait for our
+    further notice
+  </h1>
+  <% } else if (student.rejected){ %>
+  <h1 class="card p-2 bg-danger text-white">
+    Sorry, you have been rejected for this job, you can apply for some other
+    active job
+  </h1>
+  <% } %> <% } %> <% }) %> <% } %> <% if(currentUser && currentUser.selected){
+  %>
+  <h1 class="card p-2 bg-success text-white">
+    Congratulations, you have been selected, please wait for the further notice
+  </h1>
+  <% } %>
+
+  <div class="btn-group my-4 col-sm-5">
+    <a href="/jobs" class="btn btn-secondary">go back</a>
+
+    <% if(currentUser && currentUser.admin){ %>
+
+    <a class="btn btn-primary" href="/job/<%=job._id%>/questions"
+      >go to admin test panel</a
+    >
+  </div>
+
+  <h1 class="card p-2">List of students</h1>
+  <% job.students.forEach(function(student){ %>
+  <p>
+    <a href="/users/<%=student._id%>"><strong><%=student.name%></strong></a> |
+    <% if(student.shortlisted) { %>
+    <span>shortlisted</span>
+    <% } else if(student.rejected){ %>
+    <span>rejected</span>
+    <% } %>
+  </p>
+  <% }) %> <% } %>
+</div>
+<%- include('../partials/footer'); -%>
